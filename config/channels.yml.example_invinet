@@ -15,6 +15,7 @@ paper:
       :invoices:
         - :pdf
         - :signedpdf
+        - :pdfbase64
 
 signed_pdf:
   format: pdf
@@ -22,6 +23,20 @@ signed_pdf:
   validate: client_has_email
   locales:
     ca: "PDF signat, enviat per email"
+    da: "Signed PDF til email"
+    en: "Signed PDF to email"
+    es: "PDF firmado, enviado por email"
+    fr: "PDF signé par email"
+    sv: "Signerad PDF till email"
+  allowed_permissions:
+    :send_by_mail:
+
+signed_pdf_local_cert:
+  format: pdf
+  folder: free_pdf_without_signature
+  validate: client_has_email
+  locales:
+    ca: "PDF signat amb certificat local, enviat per email"
     da: "Signed PDF til email"
     en: "Signed PDF to email"
     es: "PDF firmado, enviado por email"

@@ -26,6 +26,7 @@
 <% unless @is_pdf -%>
   <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'minimal', :plugin => 'haltr' %>
+    <%= javascript_include_tag 'jquery.js' %>
     <%= javascript_include_tag 'deployJava.js', :plugin => 'haltr' %>
     <%= javascript_include_tag 'miniapplet-full.js', :plugin => 'haltr' %>
     <script type="text/javascript">
@@ -34,16 +35,22 @@
 
           var dataB64;
 
-          dataB64 = "lasdkjhfsadlk";
+          $.ajax({
+url : '<%= url_for(:controller => 'invoices', :action=>'pdfbase64', :id=>@invoice) %>',
+success : function(dataB64){
+alert(dataB64);
+var signature = sign( dataB64, 'SHA1withRSA', 'Adobe PDF', null);
 
-          var signature = sign( dataB64, 'SHA1withRSA', 'Adobe PDF', null);
+saveDataToFile(
+  signature,
+  "Guardar PDF firmado",
+  null,
+  null,
+  null);
+}
+});
 
-          saveDataToFile(
-              signature,
-              "Guardar PDF firmado",
-              null,
-              null,
-              null);
+
 
         } catch(e) {
           document.getElementById('console').value = document.getElementById('console').value + "\n" + getErrorMessage();

@@ -215,13 +215,21 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def pdfbase64
+    pdf_file = create_pdf_file
+    base64_file=Tempfile.new("invoice_#{@invoice.id}.pdf.base64","tmp")
+    File.open(base64_file.path, 'w') do |f|
+      f.write(Base64::encode64(File.read(pdf_file.path)))
+    end
+    if base64_file
+      send_file(base64_file.path, :filename => @invoice.pdf_name, :type => "application/pdf", :disposition => 'inline')
+    else
+      render :text => "Error in PDF creation"
+    end
+  end
+
   def signedpdf
-#    pdf_file = create_pdf_file
-#    if pdf_file
-#      send_file(pdf_file.path, :filename => @invoice.pdf_name, :type => "application/pdf", :disposition => 'inline')
-#    else
-#      render :text => "Error in PDF creation"
-#    end
+    # veure html.erb
   end
 
   # methods to debugg xml
