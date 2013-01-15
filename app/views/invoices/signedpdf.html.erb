@@ -1,0 +1,54 @@
+<div id="invoice_wrapper">
+  <div id="workspace1" class="haltrinvoice">
+    <div id="workspace2">
+      <div id="col1">
+
+      <%= render :partial=>'invoices/invoice' %>
+
+      <input type="button" value="Firmar" onclick="doSign();">
+
+      </div>
+    </div>
+  </div>
+
+  <span>Consola</span>
+  <br>
+  <textarea id="console" rows="10">
+  </textarea>
+</div>
+
+</div>
+
+<script type="text/javascript">
+  cargarMiniApplet('/plugin_assets/haltr/java/');
+</script>
+
+<% unless @is_pdf -%>
+  <% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'minimal', :plugin => 'haltr' %>
+    <%= javascript_include_tag 'deployJava.js', :plugin => 'haltr' %>
+    <%= javascript_include_tag 'miniapplet-full.js', :plugin => 'haltr' %>
+    <script type="text/javascript">
+      function doSign() {
+        try {
+
+          var dataB64;
+
+          dataB64 = "lasdkjhfsadlk";
+
+          var signature = sign( dataB64, 'SHA1withRSA', 'Adobe PDF', null);
+
+          saveDataToFile(
+              signature,
+              "Guardar PDF firmado",
+              null,
+              null,
+              null);
+
+        } catch(e) {
+          document.getElementById('console').value = document.getElementById('console').value + "\n" + getErrorMessage();
+        }
+      }
+    </script>
+  <% end %>
+<% end %>

@@ -215,6 +215,15 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def signedpdf
+#    pdf_file = create_pdf_file
+#    if pdf_file
+#      send_file(pdf_file.path, :filename => @invoice.pdf_name, :type => "application/pdf", :disposition => 'inline')
+#    else
+#      render :text => "Error in PDF creation"
+#    end
+  end
+
   # methods to debugg xml
   def efactura30
     @format = "facturae30"

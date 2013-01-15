@@ -4,6 +4,7 @@
   <li><%= link_to l(:button_delete), {:action=>'destroy',:id=>@invoice}, :confirm=>l(:text_are_you_sure), :method=>:delete, :class=>'icon-haltr-delete' %></li>
   <li><%= change_state_link(@invoice) %></li>
   <li><%= link_to "#{l(:save_invoice)} PDF", {:action=>'pdf', :id=>@invoice}, :class=>'icon-haltr-save' %></li>
+  <li><%= link_to "#{l(:save_invoice)} signed PDF", {:action=>'signedpdf', :id=>@invoice}, :class=>'icon-haltr-save' %></li>
   <% if @invoice.can_be_exported? %>
     <li><%= link_to "#{l(:label_send)} (#{l_export_channel(@client.invoice_format)})", {:action=>'send_invoice', :id=>@invoice}, :class=>'icon-haltr-send', :title => @invoice.sending_info %></li>
   <% elsif @invoice.export_errors and @invoice.export_errors.size > 0 -%>
