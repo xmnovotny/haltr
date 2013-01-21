@@ -1,4 +1,4 @@
-desc 'Import clients CSV data'
+desc "Import clients CSV data. Usage: rake haltr:import:clients['project_name','clients.csv']"
 
 namespace :haltr do
   namespace :import do
@@ -25,7 +25,7 @@ namespace :haltr do
   end
 end
 
-desc 'Import invoices CSV data'
+desc "Import invoices CSV data. Usage: rake haltr:import:invoices['project_name','invoices.csv']"
 
 namespace :haltr do
   namespace :import do
